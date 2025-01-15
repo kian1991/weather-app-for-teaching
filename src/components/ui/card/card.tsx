@@ -6,8 +6,8 @@ export function Card({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("rounded-lg bg-white p-4 shadow-md", props.className)}
       {...props}
+      className={cn("rounded-lg bg-white p-4 shadow-md", props.className)}
     >
       {children}
     </div>
@@ -20,7 +20,10 @@ export function CardHeader({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("flex items-center justify-between", props.className)}
+      className={cn(
+        "flex items-center justify-between text-2xl font-bold tracking-tight",
+        props.className,
+      )}
       {...props}
     >
       {children}

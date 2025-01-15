@@ -2,13 +2,19 @@ import { useState } from "react";
 import { Container } from "./components/ui/container";
 import { WeatherInputForm } from "./components/weather-input-form";
 import { Position, WeatherApiResponse } from "./types";
+import { getWeatherData } from "./services/weather-service";
+import { Card, CardBody, CardHeader } from "./components/ui/card/card";
 
 export function App() {
   const [currentWeather, setCurrentWeather] =
     useState<WeatherApiResponse | null>(null);
+  const [pos, setPos] = useState<Position | null>(null);
 
-  function handleCityInput(position: Position) {
-    console.log("position", position);
+  async function handleCityInput(position: Position) {
+    setPos(position);
+    // const weather = await getWeatherData(position);
+    // console.log("weather", weather);
+    // if (weather) setCurrentWeather(weather);
   }
 
   return (
@@ -18,6 +24,18 @@ export function App() {
           React Weather App
         </h1>
         <WeatherInputForm onCityInput={handleCityInput} />
+        <Card className="mt-8">
+          <CardHeader className="mb-2">Aktuelle Position</CardHeader>
+          <CardBody className="text-xl">
+            {pos?.lat}
+            <hr></hr>
+            {pos?.lng}
+            {/* Temp:
+            {currentWeather?.current_weather.temperature ?? (
+              <div className="h-8 w-[130px] animate-pulse rounded-md bg-neutral-400/50"></div>
+            )} */}
+          </CardBody>
+        </Card>
       </Container>
     </div>
   );
