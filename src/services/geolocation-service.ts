@@ -4,7 +4,8 @@ import { GeocoderResponse, Position } from "../types";
 
 export const useGeolocation = (cityName: string) =>
   useQuery<Position>({
-    queryKey: ["geolo"],
+    queryKey: ["geolo", cityName],
+    enabled: cityName !== "",
     queryFn: async () => {
       const response = await fetch(GEOCODER_API_URL + cityName);
       const data: GeocoderResponse = await response.json();

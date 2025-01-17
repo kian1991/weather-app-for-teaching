@@ -1,41 +1,45 @@
 import { useEffect, useState } from "react";
 import { Position } from "../types";
-import { getPositionByCityname } from "../services/geolocation-service";
 import { Input } from "./ui/input";
+import { useGeolocation } from "../services/geolocation-service";
 
 type WeatherInputFormProps = {
-  onCityInput: (position: Position) => void;
+  onPositionChange: (position: Position) => void;
 };
 
-export function WeatherInputForm({ onCityInput }: WeatherInputFormProps) {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+export function WeatherInputForm({ onPositionChange }: WeatherInputFormProps) {
   const [inputValue, setInputValue] = useState<string>("");
+  const [debouncedValue, setDebouncedValue] = useState<string>(inputValue);
+
+  const { data, error, isLoading } = useGeolocation(debouncedValue);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      handleInputChange(inputValue);
+      setDebouncedValue(inputValue);
     }, 350);
     return () => {
       clearTimeout(timeoutId);
     };
   }, [inputValue]);
 
-  async function handleInputChange(city: string) {
-    if (!city) return;
-    const position = await getPositionByCityname(city.toString());
-    if (!position) {
-      setErrorMessage("Couldnt find location! Try again.");
-      return;
-    }
-    // call callback function from props
-    onCityInput(position);
-    // reset text
-    setErrorMessage(null);
-  }
+  useEffect(() => {
+    if (!data) return;
+    onPositionChange(data);
+  }, [data, onPositionChange]);
 
   return (
     <div className="flex flex-col gap-1 text-center">
-      <div className="flex gap-1">
+      {isLoading && (
+        <div className="absolute left-7 top-7 animate-spin text-2xl text-white">
+          🤯
+        </div>
+      )}
+      <div className="flex flex-col gap-2">
+        {error && (
+          <span className="font-mono text-xl text-red-300">
+            {error.message}
+          </span>
+        )}
         <Input
           value={inputValue}
           inputSize={"lg"}
@@ -44,9 +48,6 @@ export function WeatherInputForm({ onCityInput }: WeatherInputFormProps) {
           onChange={(e) => setInputValue(e.target.value)}
         />
       </div>
-      {errorMessage && (
-        <span className="font-mono text-xl text-red-300">{errorMessage}</span>
-      )}
     </div>
   );
 }

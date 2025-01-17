@@ -23,7 +23,7 @@ export function App() {
         <h1 className="mb-6 text-3xl tracking-tighter text-white">
           React Weather App
         </h1>
-        <WeatherInputForm onCityInput={handleCityInput} />
+        <WeatherInputForm onPositionChange={handleCityInput} />
         <Card className="mt-8">
           <CardHeader className="mb-2">Aktuelle Position</CardHeader>
           <CardBody className="text-xl">
