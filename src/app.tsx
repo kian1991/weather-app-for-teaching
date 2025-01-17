@@ -1,20 +1,14 @@
 import { useState } from "react";
 import { Container } from "./components/ui/container";
 import { WeatherInputForm } from "./components/weather-input-form";
-import { Position, WeatherApiResponse } from "./types";
-import { getWeatherData } from "./services/weather-service";
+import { Position } from "./types";
 import { Card, CardBody, CardHeader } from "./components/ui/card/card";
 
 export function App() {
-  const [currentWeather, setCurrentWeather] =
-    useState<WeatherApiResponse | null>(null);
   const [pos, setPos] = useState<Position | null>(null);
 
   async function handleCityInput(position: Position) {
     setPos(position);
-    // const weather = await getWeatherData(position);
-    // console.log("weather", weather);
-    // if (weather) setCurrentWeather(weather);
   }
 
   return (
