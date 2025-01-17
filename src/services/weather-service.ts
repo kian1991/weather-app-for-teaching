@@ -1,10 +1,10 @@
+import { getWeatherUrl } from "../constants";
 import { Position, WeatherApiResponse } from "../types";
 
-export async function getWeatherData({
-  lat,
-  lng,
-}: Position): Promise<WeatherApiResponse | null> {
-  const weatherApiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&currentWeather=true&timezone=Europe%2FBerlin`;
+export async function getWeatherData(
+  position: Position,
+): Promise<WeatherApiResponse | null> {
+  const weatherApiUrl = getWeatherUrl(position);
 
   try {
     const response = await fetch(weatherApiUrl);
