@@ -31,7 +31,7 @@ export function WeatherInputForm({ onPositionChange }: WeatherInputFormProps) {
     <div className="flex flex-col gap-1 text-center">
       {isLoading && (
         <div className="absolute left-7 top-7 animate-spin text-2xl text-white">
-          🤯
+          🦭
         </div>
       )}
       <div className="flex flex-col gap-2">
