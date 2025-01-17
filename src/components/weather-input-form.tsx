@@ -1,8 +1,7 @@
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Position } from "../types";
 import { getPositionByCityname } from "../services/geolocation-service";
 import { Input } from "./ui/input";
-import { ButtonPrimary } from "./ui/button-primary";
 
 type WeatherInputFormProps = {
   onCityInput: (position: Position) => void;
