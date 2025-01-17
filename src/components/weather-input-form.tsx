@@ -25,7 +25,8 @@ export function WeatherInputForm({ onPositionChange }: WeatherInputFormProps) {
   useEffect(() => {
     if (!data) return;
     onPositionChange(data);
-  }, [data, onPositionChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <div className="flex flex-col gap-1 text-center">

@@ -38,22 +38,42 @@ export type WeatherApiResponse = {
   timezone: string;
   timezone_abbreviation: string;
   elevation: number;
-  current_weather_units: {
+  current_units: {
     time: string;
     interval: string;
-    temperature: string;
-    windspeed: string;
-    winddirection: string;
+    temperature_2m: string;
+    relative_humidity_2m: string;
+    apparent_temperature: string;
     is_day: string;
-    weathercode: string;
+    precipitation: string;
+    rain: string;
+    showers: string;
+    snowfall: string;
+    weather_code: string;
+    cloud_cover: string;
+    pressure_msl: string;
+    surface_pressure: string;
+    wind_speed_10m: string;
+    wind_direction_10m: string;
+    wind_gusts_10m: string;
   };
-  current_weather: {
-    time: string; // ISO 8601 format
+  current: {
+    time: string;
     interval: number;
-    temperature: number;
-    windspeed: number;
-    winddirection: number;
-    is_day: 0 | 1;
-    weathercode: number; // WMO weather code
+    temperature_2m: number;
+    relative_humidity_2m: number;
+    apparent_temperature: number;
+    is_day: number;
+    precipitation: number;
+    rain: number;
+    showers: number;
+    snowfall: number;
+    weather_code: number;
+    cloud_cover: number;
+    pressure_msl: number;
+    surface_pressure: number;
+    wind_speed_10m: number;
+    wind_direction_10m: number;
+    wind_gusts_10m: number;
   };
 };
